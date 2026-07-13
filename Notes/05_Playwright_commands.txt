@@ -1,0 +1,51 @@
+Playwright Commands:
+===========================
+
+To run all spec files in tests folder, 
+by default in all 3 browsers (chromium,firefox,webkit) in headless
+	==> npx playwright test 
+
+To open the html reports of last execution
+	==> npx playwright show-report
+
+To run specified spec file in tests folder, 
+by default in all 3 browsers (chromium,firefox,webkit) in headless
+	==> npx playwright test	tests/Playwright01.spec.ts 
+	
+
+To run specified spec file in tests folder, 
+by default in all 3 browsers in headed mode
+	==> npx playwright test	tests/Playwright01.spec.ts --headed 
+	
+	
+To run specified spec file in tests folder, 
+in the specified browser in headed mode 
+	==> npx playwright test	tests/Playwright01.spec.ts --headed --project=chromium 
+	
+To run specified spec file in tests folder in ui mode 
+	==> npx playwright test	tests/Playwright01.spec.ts --ui
+	
+
+To run specified spec file in tests folder parallelly 
+	==> npx playwright test	tests/Playwright01.spec.ts --workers=3
+	
+
+To run specified spec file in debug mode 
+(opens debug window if test fails)
+	==> npx playwright test	tests/Playwright01.spec.ts --debug 
+	
+	
+To run specified spec file along with storing trace log 
+	==> npx playwright test	tests/Playwright01.spec.ts --trace on 
+	==> To View Trace Log:
+		==> npx playwright show-report
+		==> In html report, click on trace log link
+	
+	
+	
+	
+	
+	
+	
+	
+  
