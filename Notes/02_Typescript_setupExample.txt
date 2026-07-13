@@ -1,0 +1,45 @@
+Typescript Project Config Steps:
+=====================================
+1. Create Project Folder
+	==> e.g. C:\Work\Typescript
+	
+2. Open VisualCode and open above folder
+
+3. Open Terminal:
+	==> npm init -y 
+		- This will create package.json
+		
+4. Typescript Installation
+	==> npm i -D typescript 
+			or 
+		npm install --save-dev typescript 
+	
+	==> npx tsc --version
+	==> npx tsc --init 
+			==> creates tsconfig.json 
+			
+	==> Set the following to false in tsconfig.json 
+	    // Other Outputs
+		"sourceMap": false,
+		"declaration": false,
+		"declarationMap": false,
+	
+	    // Recommended Options
+		"verbatimModuleSyntax": false,
+	
+5. Working with Typescript Examples:
+	5.1 Create folder by name tsexamples in rootlevel of project 
+	5.2 Create a new file by name ts01.ts inside this tsexamples folder
+	5.3 Add Typescript Code & Save it
+	5.4 Open Terminal and navigate to C:\Work\Typescript\tsexamples 
+	5.5 To Compile:
+			npx tsc  
+				==> This will convert all *.ts to &.js files
+	5.6 To Run:
+			node ts01.js 
+			
+			
+
+	
+	
+	

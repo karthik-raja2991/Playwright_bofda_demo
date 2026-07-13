@@ -1,0 +1,103 @@
+
+
+
+
+		1. Tool
+		2. Library
+		3. Framework
+
+Tosca ==> Tool 
+Selenium WD ==> Library
+Playwright ==> Framework
+
+
+Tool 
+	- Own IDE
+	- Automation APIs/ Class / Library 
+	- Recording
+	- Execution
+	- Validation
+	- Reporting 
+	- Built-in support for BDD (Optional)
+	- CI/CD Integration Support
+
+Library:
+	- Automation APIs/ Class / Library
+	
+Se WD Framework (Java)
+	- Se WD Core Lib 
+	- Pick an IDE 
+	- JUnit / TestNG 
+		- Test Case + Test Suite Creation 
+		- Validation 
+		- Built-in Html Reporting (TestNG)
+	- 3rd Party Extent Reporting
+	- Apache POI APIs for Excel Reading 
+	
+Playwright Framework
+	- Built-in Test Creation Syntax 
+		(taken from Mocha F/w)
+	- Built-in Test Runner 
+	- Built-in Assertion
+	- Built-in Reporting
+	- Built-in Screenshot, Video
+	- Built-in Debug, Tracing
+	- Built-in Browsers
+		(Chromium, Firefox, WebKit)
+	
+
+2020 Jan, Microsoft ==> Playwright
+	(Google's f/w - Puppetier)
+
+	- Javascript 
+	- Typescript 
+	- C#
+	- Java 
+	- Python
+	
+	
+	Architecture of Playwright:
+		- Tightly coupled
+		- CDP Protocol (websocket)
+		
+Playwright:
+	- Chromium
+	- Firefox 
+	- WebKit
+	
+Key Features:
+	- Auto-Wait 
+	- Web-First Assertion 
+	- Explicit Wait also 
+	- Video Recording 
+	- Screenshot
+	- Debug
+	- Tracing 
+	- API Testing 
+	- Network Intercepting
+	- Flakiness Handling 
+	- Saving Login-Session (SSO)
+	- Cross-language, Cross-Browser, Cross-Platform 
+	
+Pre-Requisites:
+	- MS Visual Code IDE 
+	- Selected Language Run-Time 
+		- For JS/TS - NodeJS
+		- For Java - JDK 
+		- For C# - DotNet 
+		- For Python - Python 
+		
+		
+	
+	
+	
+	
+	
+	
+		
+		
+	
+
+	
+	
+	
