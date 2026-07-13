@@ -1,3 +1,7 @@
+
+Pre-Requisites:
+	* Node.js v22 or later 
+	* MS Visual Code IDE 
 Playwright Project Config Steps:
 =====================================
 1. Create Project Folder

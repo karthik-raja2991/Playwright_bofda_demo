@@ -1,0 +1,10 @@
+Generic Term			Playwright Term (Runner)		Playwright Cucumber
+=====================================================================================
+Test Suite				Spec File 						Feature File
+
+Test Suite Extension	.spec.ts						.feature
+						
+Test Case 				test() block					Scenario Block 
+
+Test Steps				Steps 							Given/When/Then Steps 
+
