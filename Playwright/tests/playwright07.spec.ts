@@ -9,7 +9,7 @@
 
 import {test, expect} from '@playwright/test'
 
-test("TestCase06", async ({page})=>{
+test("TestCase07", async ({page})=>{
     
     // 1. Search Automation in amazon.in page
     await page.goto("https://amazon.in")
@@ -20,6 +20,7 @@ test("TestCase06", async ({page})=>{
     //2. Waiting till page loaded using domcontentloaded state along with timeout
     await page.waitForLoadState("domcontentloaded", {timeout: 60000})
 
+    await page.waitForTimeout(2000)
     //3. Chaining of Locators & Reading Text from WebPage using promise method
     //Method-1
     await page.locator(".s-breadcrumb-header-text").locator("h2").textContent().then(txt =>{
