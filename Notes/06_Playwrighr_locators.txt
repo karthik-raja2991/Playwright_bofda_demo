@@ -1,0 +1,94 @@
+Selenium WebDriver Locators:
+	1. By Id 
+	2. By Name
+	3. By LinkText
+	4. By CssSelector
+	5. By Xpath 
+	6. By Classname
+	7. By Tagname
+	8. By PartialLinkText
+	
+================================================
+Playwright Locators:
+	1. Using page.locator() method
+		1.1 CssSelector
+		1.2 Xpath 
+		
+	2. page.getByAltText
+		<img alt='Playwright logo'>
+			==> await page.getByAltText('Playwright logo').click()
+		
+    3. page.getByLabel
+		<input aria-label="Username">
+			==> await page.getByLabel('Username').fill('john');
+			
+		<label for="password-input">Password:</label>
+		<input id="password-input">
+			==> await page.getByLabel('Password:').fill('secret');	
+	
+	
+    4. page.getByPlaceholder
+		<input type="text" placeholder="Search Amazon.in">
+			==> page.getByPlaceholder("Search Amazon.in").fill("laptop")
+		
+    5. page.getByRole
+			role: "alert" | "alertdialog" | "application" | 
+				  "article" | "banner" | "blockquote" | "button" | 
+				  "caption" | "cell" | "checkbox" | "code" | 
+				  "columnheader" | "combobox" | "complementary" | 
+				  "contentinfo" | "definition" | "deletion" | 
+				  "dialog" | "directory" | "document" | "emphasis" | 
+				  "feed" | "figure" | "form" | "generic" | "grid" | 
+				  "gridcell" | "group" | "heading" | "img" | 
+				  "insertion" | "link" | "list" | "listbox" | 
+				  "listitem" | "log" | "main" | "marquee" | "math" | 
+				  "meter" | "menu" | "menubar" | "menuitem" | 
+				  "menuitemcheckbox" | "menuitemradio" |
+			Consider the following DOM structure.
+
+			<h3>Sign up</h3>
+			<label>
+			  <input type="checkbox" /> Subscribe
+			</label>
+			<br/>
+			<button>Submit</button>
+			You can locate each element by its implicit role:
+
+			await expect(page.getByRole('heading', { name: 'Sign up' })).toBeVisible();
+
+			await page.getByRole('checkbox', { name: 'Subscribe' }).check();
+
+			await page.getByRole('button', { name: /submit/i }).click();
+
+	
+    5. page.getByTestId
+		<button data-testid="directions">Itinéraire</button>
+			==> await page.getByTestId('directions').click();
+			
+    6. page.getByText
+		<p>Welcome to the world of Playwright</p>
+			==> await page.getByText("Welcome to the world of Playwright")
+			==> await page.getByText(/world of/)	
+
+		<div>Hello <span>world</span></div>
+		<div>Hello</div>
+			You can locate by text substring, exact string, or a regular expression:
+
+			// Matches <span>
+			page.getByText('world');
+
+			// Matches first <div>
+			page.getByText('Hello world');
+
+			// Matches second <div>
+			page.getByText('Hello', { exact: true });
+
+			// Matches both <div>s
+			page.getByText(/Hello/);
+
+			// Matches second <div>
+			page.getByText(/^hello$/i);
+	
+    7. page.getByTitle
+		<div title="Product">...</div>
+			==> await page.getByTitle("Product")
