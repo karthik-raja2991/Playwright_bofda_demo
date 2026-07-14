@@ -15,7 +15,7 @@ by default in all 3 browsers (chromium,firefox,webkit) in headless
 
 To run specified spec file in tests folder, 
 by default in all 3 browsers in headed mode
-	==> npx playwright test	tests/Playwright01.spec.ts --headed 
+	==> npx playwright test	tests/playwright01.spec.ts --headed 
 	
 	
 To run specified spec file in tests folder, 
@@ -40,6 +40,10 @@ To run specified spec file along with storing trace log
 	==> To View Trace Log:
 		==> npx playwright show-report
 		==> In html report, click on trace log link
+
+To record script using codegen:
+	==> npx playwright codegen 
+	==> npx playwright codegen http://blazedemo.com 
 	
 	
 	
