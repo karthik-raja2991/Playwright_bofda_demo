@@ -1,0 +1,161 @@
+
+Playwright Cucumber Integration Config Steps:
+====================================================
+
+1. Install the following:
+	1.1 Install Cucumber (Gherkin) Full Support extension in Visual Code
+	
+	1.2 Open the terminal & install the following:
+			==> npm i -D @cucumber/cucumber ts-node cucumber-html-reporter
+
+2. Create "cucumber.json" file in root level of project folder and add the following code:
+		{
+			"default": {
+				"parallel": 1,
+
+				"paths": [
+					"./tests/features"
+				],
+				"require": [
+					"./tests/steps/*.ts"
+				],
+				"format": [
+					"html:cucumber_reports/cucumber-default-html-report.html",
+					"json:cucumber_reports/cucumber-report.json"
+				]
+			}
+		}
+
+
+3. Create "generate_cucumber_report.js" file in the root level of project folder and add the following:
+		
+		var reporter = require('cucumber-html-reporter');
+
+		var options = {
+			//Available Themes 'bootstrap', 'hierarchy', 'foundation', 'simple'
+			theme: 'bootstrap',
+			jsonFile: 'cucumber_reports/cucumber-report.json',
+			output: 'cucumber_reports/cucumber_report.html',
+			reportSuiteAsScenarios: true,
+			scenarioTimestamp: true,
+			launchReport: true,
+			metadata: {
+				"App Version": "1.0.1",
+				"Test Environment": "STAGING",
+				"Browser": "Chromium v101",
+				"Platform": "Windows 11",
+				"Parallel": "Scenarios",
+				"Executed": "Remote"
+			},
+			failedSummaryReport: true,
+		};
+
+		reporter.generate(options);
+
+
+4. Open package.json and add the following script commands to "scripts":
+		"cucumbertest": "cucumber-js test",
+		"cucumbertags": "cucumber-js test -t \"@sanity\" ",
+		"cucumbertags2": "cucumber-js test -t \"@sanity or @smoke\" ",
+		"cucumbertagsreport": "cucumber-js test -t \"@sanity or @smoke\" & node generate_cucumber_report.js",
+		"cucumberalltest": "cucumber-js test & node generate_cucumber_report.js",
+		"cucumberreport": "node generate_cucumber_report.js"
+
+5. Create the following 2 folders inside tests folder
+		5.1 features
+		5.2 steps
+	
+6. Create "BlazeDemoFeature1.feature" file in "features" folder created in Step-5 and add the following code:
+
+		#--------------------------------------------------------------------------------------------
+		# This is the first feature file
+
+		Feature: Blaze Demo Features
+
+			Background: Setup
+				Given User has navigated to "https://blazedemo.com"
+
+			@sanity
+			Scenario: Test Case - 1
+				When User Searches for "Boston" to "London"
+				Then Result page should show 5 flights
+
+			@ddt
+			Scenario Outline: Test Case - 2
+				When User Searches for "<fromCity>" to "<toCity>"
+				Then Result page should show 5 flights
+				Examples:
+					| fromCity    | toCity   |
+					| Boston      | Rome     |
+					| Portland    | London   |
+					| Mexico City | New York |
+
+			@smoke
+			Scenario: Test Case - 3
+				When User Searches the flight
+					| fromCity | toCity |
+					| Boston   | Rome   |
+				Then Result page should show 5 flights
+		#--------------------------------------------------------------------------------------------
+
+7. Create "cucumberSteps.ts" file in "steps" folder created in Step-5 & add the following code:
+		//--------------------------------------------------------------------------------------------
+		import { Given, When, Then, After, Before, setDefaultTimeout, DataTable } from "@cucumber/cucumber"
+		import { chromium, expect} from "@playwright/test"
+
+		let page: any
+		let browser: any
+		setDefaultTimeout(30000);
+
+		Before(async () => {
+
+			browser = await chromium.launch({ headless: false })
+			page = await browser.newPage()
+			await page.setDefaultTimeout(20000)
+			await page.setDefaultNavigationTimeout(60000)
+		})
+
+		After(async () => {
+			if (browser) {
+				await browser.close()
+			}
+		})
+
+
+		Given("User has navigated to {string}", async (url: string) => {
+			await page.goto(url, { timeout: 60000 })
+			await page.waitForTimeout(2000)
+		})
+
+		When("User Searches for {string} to {string}", async (fromCity: string, toCity: string) => {
+			await searchFlight(fromCity,toCity)
+		})
+
+		When('User Searches the flight', async function (dataTable:DataTable) {
+		  await searchFlight(dataTable.rows()[0][0], dataTable.rows()[0][1])
+		})
+
+		Then("Result page should show {int} flights", async (expectedCount: number) => {
+			await expect(page.locator("table tbody tr")).toHaveCount(expectedCount)
+		})
+
+
+		async function searchFlight(fromCity:string,toCity:string):Promise<void>
+		{
+			await page.locator('select[name="fromPort"]').selectOption({ label: fromCity.trim() })
+			await page.locator('select[name="toPort"]').selectOption({ label: toCity.trim() })
+			await page.locator("//input[@value='Find Flights']").click()
+			await page.waitForTimeout(2000)
+		}
+		//--------------------------------------------------------------------------------------------
+
+
+
+
+8. To run cucumber feature file just created, execute the following 2 commands in command-line
+	==> npm run cucumbertest
+	==> node generate_cucumber_report.js
+
+
+
+

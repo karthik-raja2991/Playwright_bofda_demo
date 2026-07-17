@@ -1,0 +1,15 @@
+Playwright locators:- 
+using page.locators() method
+1. CSS selectors
+2. Xpath
+
+using 
+1. page.getByAltText
+<img alt = "Logo" href="" >
+where ever we have alt attribute, we can use this locator
+2. page.getByLabel
+By default regular expression will be used in the getByLebel 
+we can use where we have aria-label and elements having <label> tag
+
+3. 
+

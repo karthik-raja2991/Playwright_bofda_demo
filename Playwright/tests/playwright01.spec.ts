@@ -9,7 +9,7 @@ This is my first manually created playwright spec file
 */
 
 import {test, expect} from 'playwright/test'
-test("TC_001_validate the title",async ({page})=> {
+test("TC_001_Sanity_validate the title",async ({page})=> {
     await page.goto("https://blazedemo.com")
 
     // title validation

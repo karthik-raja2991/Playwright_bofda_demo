@@ -8,6 +8,14 @@
 
 import {test, expect} from '@playwright/test'
 
+test.use({
+    video: {
+        mode: 'on',
+        size: { width: 800, height: 600 }
+    },
+    screenshot: 'on'
+})
+
 test("TestCase06", async ({page})=>{
     //1. Using Variables to store values
     let fromCity:string = "Portland"

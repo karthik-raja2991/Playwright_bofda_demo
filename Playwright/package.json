@@ -3,12 +3,29 @@
   "version": "1.0.0",
   "description": "This project is for playwright Automation Testing",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "generate-allure": "npx allure generate allure-results --clean -o allure-report",
+    "open-allure": "npx allure open allure-report",
+    "allure-report": "npx allure generate allure-results --clean -o allure-report && npx allure open allure-report",
+    "cucumbertest": "cucumber-js test",
+		"cucumbertags": "cucumber-js test -t \"@sanity\" ",
+		"cucumbertags2": "cucumber-js test -t \"@sanity or @smoke\" ",
+		"cucumbertagsreport": "cucumber-js test -t \"@sanity or @smoke\" & node generate_cucumber_report.js",
+		"cucumberalltest": "cucumber-js test & node generate_cucumber_report.js",
+		"cucumberreport": "node generate_cucumber_report.js"
+  },
   "keywords": [],
   "author": "Karthik Raja Rajasekar",
   "license": "ISC",
   "devDependencies": {
+    "@cucumber/cucumber": "^13.1.1",
+    "@faker-js/faker": "^10.5.0",
     "@playwright/test": "^1.61.1",
-    "@types/node": "^26.1.1"
+    "@types/node": "^26.1.1",
+    "allure-commandline": "^2.43.0",
+    "allure-playwright": "^3.10.2",
+    "csv-parse": "^7.0.1",
+    "cucumber-html-reporter": "^7.2.0",
+    "ts-node": "^10.9.2"
   }
 }

@@ -1,0 +1,26 @@
+Allure Report Config Steps:
+==================================
+1. Install the following:
+	==> npm install -D allure-playwright allure-commandline
+	
+2. Update the reporter flag in playwright.config.ts:
+	==> reporter: [ ['list], ['html'],['allure-playwright']],
+	
+3. Run any test & then execute the following commands to open allure-reporter
+	==> # 1. Generate the HTML files
+		npx allure generate allure-results --clean -o allure-report
+
+		# 2. View the generated static folder
+		npx allure open allure-report
+		
+4. To store these commands in package.json, update the "scripts" with following:
+	    "scripts": {
+			"generate-allure": "npx allure generate allure-results --clean -o allure-report",
+			"open-allure": "npx allure open allure-report",
+			"allure-report": "npx allure generate allure-results --clean -o allure-report && npx allure open allure-report "
+		  },		
+	  
+5. To Run commands created in Step-4:
+	==> npm run generate-allure
+	==> npm run open-allure
+

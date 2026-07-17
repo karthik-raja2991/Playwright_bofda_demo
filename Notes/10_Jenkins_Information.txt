@@ -1,0 +1,88 @@
+Playwright - Jenkins - Pipeline Execution Config Steps:
+================================================================
+
+Pre-Requisites:
+	1. Jenkins Server should have following plugins installed:
+		1.1 AnsiColor
+		1.2 HTML Publisher plugin 
+		1.3 Pipeline & it's related plugins 
+		
+	2. Jenkins Node should have nodejs & git installed 
+	
+	3. Following details should be obtained from Jenkins Team:
+		3.1 Jenkins URL
+		3.2 Jenkins Login Credentials
+		3.3 Jenkins Node name (where playwright should be executed)
+		3.4 Git Repository URL of your Playwright Project
+		
+
+1. Login to Jenkins
+
+
+
+2. Click on "New Item" link on dashboard page 
+	2.1 Enter "Playwright Automation" as item name
+	2.2 Select "Pipeline" as item type 
+	2.3 Click OK
+
+
+	
+3. In the configure page of newly created item:
+	3.1 click on "Pipeline" on the left side.
+	
+	3.2 Copy & Paste the following code in "Script" editor
+
+//------------------------------------------------------------------------------------------
+pipeline {
+    agent {label 'Node-1'}
+    options {
+        ansiColor('xterm')
+    }
+    stages {
+        stage('Playwright Automation') {
+            steps {
+                bat '''
+		        git clone https://github.com/tgcgit/playwright-for-pipeline
+                cd playwright-for-pipeline
+                npm install && npx playwright install --with-deps && npx playwright test --reporter=list,html
+                '''
+            }
+        }
+
+	stage('Uploading Html Report') {
+            steps {
+               publishHTML(target: [
+                    allowMissing: false, // Set to true if the report directory might not exist
+                    alwaysLinkToLastBuild: true, // Link to the latest report on the project page
+                    keepAll: true, // Keep reports for all past builds
+                    reportDir: 'playwright-for-pipeline/playwright-report', // Directory containing the HTML files
+                    reportFiles: 'index.html', // The main HTML file to display
+                    reportName: 'My HTML Report' // The name that appears in Jenkins UI
+                ])
+            }
+        }
+    }
+}
+//------------------------------------------------------------------------------------------
+
+	3.3 Change ==> 'Node-1' with provided name in this ==> agent {label 'Node-1'} 
+	
+	3.4 Update ==> git clone line with your git repository path 
+	
+	3.5 Click "Save"
+
+
+
+4. Running the Job:
+	4.1 On the landing page click on "Build Now"  
+			-- or -- 
+		In the dashboard page, click on "Run" icon for the job you've created 
+   
+    4.2 During the execution, bottom-left it will show build number starting with "#".
+		Click on this and on the landing page click on "Console Output" to see live output
+		of execution in pipeline
+		
+	4.3 Once execution completed, click on "Job" name in the top and look for Html Report
+	
+
+

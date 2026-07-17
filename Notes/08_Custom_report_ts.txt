@@ -1,0 +1,46 @@
+Custom Report Config Steps:
+==================================
+1. Create a folder "mylib" in root level of project
+
+2. Create a file inside "mylib" folder by name "CustomReporter.ts"
+
+3. Copy & paste the following code inside 'CustomReporter.ts' file.
+
+//*******************************************************************
+import type {
+    FullConfig, FullResult, Reporter, Suite, TestCase, TestResult, TestStep
+} from '@playwright/test/reporter';
+
+export default class MyReporter implements Reporter {
+    onBegin(config: FullConfig, suite: Suite) {
+        console.log(`Starting the run with ${suite.allTests().length} tests`);
+    }
+
+    onTestBegin(test: TestCase, result: TestResult) {
+        console.log(`Starting test ${test.title}`);
+    }
+
+    onTestEnd(test: TestCase, result: TestResult) {
+        console.log(`Finished test ${test.title}: ${result.status}`);
+    }
+
+    onEnd(result: FullResult) {
+        console.log(`Finished the run: ${result.status}`);
+    }
+
+    onStepBegin(test: TestCase, result: TestResult, step: TestStep): void {
+
+        if (step.location != undefined) {
+            console.log(`Executing step: Line: ${step.location?.line} : ${step.title}`)
+        }
+    }
+
+}
+
+//*******************************************************************
+
+4. Update 'reporter' flag in playwright.config.ts with following:
+	==>   reporter: [['list'], ['html'], ['allure-playwright'], ['./mylib/CustomReporter.ts']],
+	
+5. Run any spec file to see custom report in command-line 
+

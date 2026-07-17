@@ -10,7 +10,7 @@ Objectives
 */
 
 import {test, expect} from 'playwright/test'
-test("TC_005_Web first assertions",async ({page})=> {
+test("TC_005_Sanity_Web first assertions",async ({page})=> {
     await page.goto("https://blazedemo.com")
 
     //validate the title

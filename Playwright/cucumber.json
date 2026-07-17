@@ -1,0 +1,16 @@
+{
+			"default": {
+				"parallel": 1,
+
+				"paths": [
+					"./tests/features"
+				],
+				"require": [
+					"./tests/steps/*.ts"
+				],
+				"format": [
+					"html:cucumber_reports/cucumber-default-html-report.html",
+					"json:cucumber_reports/cucumber-report.json"
+				]
+			}
+		}

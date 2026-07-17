@@ -1,0 +1,25 @@
+
+Config Steps to reuse training Playwright Project in Local PC:
+===============================================================
+Pre-Requisites:
+	1. JRE 21 or later (for allure reports)
+	2. Nodejs v22 or later 
+	3. Visual Code IDE latest 
+	
+Steps:
+==========
+1. Download Playwright Project .zip file & unzip to C:\Work
+
+2. Navigate to Project folder where package.json is existing
+   & run following 2 commands:
+		==> npm install 
+		==> npx playwright install
+		
+3. To run any spec file from root level of project:
+		==> npx playwright test tests/Playwright01.spec.ts --headed --project=chromium 
+		
+4. To Edit or to add new spec files:
+	4.1 Open Visual Code 
+	4.2 File->Open Folder & select playwright project folder 
+	
+	
